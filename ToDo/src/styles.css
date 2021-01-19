@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #ccc;
+}
+
+.container {
+    padding: 65px
+}
+
+h1{
+    font-weight:900;
+    display:flex;
+    justify-content: center;
+    font-size: 4em;
+    color: navy
+}
+
+.mainArea{
+    background: whitesmoke;
+    border: 1px solid navy;
+    box-shadow: 2px 4px navy;
+    padding:26px;
+}
