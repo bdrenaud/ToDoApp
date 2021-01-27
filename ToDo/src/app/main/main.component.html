@@ -1,16 +1,20 @@
-<div class="row mainArea">
-
-    <div class="form-group">
-        <input class="form-control" (change)="addToList($event.target.value)" [value]="entry">
-        <div class="form-control" *ngFor="let item of toDoList" [value]="item.title" (click)="item.completed = true"> 
-    <div *ngIf="!item.completed">
-    
-        {{item.title}}
-    <a class="btn btn-primary"> Completed</a>
-    </div>
-    
-</div>
-
 <div class="row">
-    
+    <form [formGroup]="entryForm">
+        <div class="form-group" >
+            <input class="form-control"  type="text" formControlName="entryValue"/>
+            <button style="display: none;" type="submit" (click)="addToList()">Submit</button>
+            <div *ngFor="let item of toDoList">
+                <div class="form-control">
+                    <div *ngIf="!item.completed" class="row">
+                        <div class="col-sm-10">
+                            {{ item.title }}
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="checkbox" (click)="remove(item.id)"/>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

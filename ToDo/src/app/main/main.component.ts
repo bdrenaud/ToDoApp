@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-main',
@@ -8,28 +10,37 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 toDoItem: any;
 toDoList: any;
-entry: string;
+entryForm = new FormGroup({ 
+  entryValue: new FormControl('')
+})
+
 
   constructor() { }
 
   ngOnInit(): void {
     this.toDoList = new Array();
-    this.entry = '';
+    this.entryForm.reset();
+    this.entryForm.controls["entryValue"].setValue("");
+
   }
 
-  addToList(text){
-    if(text !== ''){
-    const task= {
-      title: text,
-      completed:false
+  addToList(){
+    const task = {
+      id: Math.floor(Math.random() * (10000 -1) + 1),
+      title: this.entryForm.controls["entryValue"].value,
+      completed: false
     }
-    this.toDoList.push(task)
-    this.entry= null;
+    this.toDoList.push(task);
+    console.log(this.toDoList);
+    this.entryForm.reset();
+    this.entryForm.controls["entryValue"].setValue("");
   }
-    else {
-      alert('Enter Task!')
+
+  remove(id){
+    var index = this.toDoList.findIndex(x => x.id == id)
+    if (index != -1){
+      this.toDoList.splice(index, 1)
     }
-   
   }
 
 }
